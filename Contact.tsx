@@ -23,21 +23,19 @@ export default function Contact() {
         body: JSON.stringify({ email })
       })
 
-      const data = await response.json()
+      const result = await response.json()
 
       if (response.ok) {
         console.log('Email subscribed successfully:', email)
         setIsSubmitted(true)
         setEmail('')
       } else {
-        console.error('Subscription error:', data.error)
-        // Still show success to user but log the error
+        console.error('Subscription error:', result.error)
         setIsSubmitted(true)
         setEmail('')
       }
     } catch (error) {
       console.error('Error submitting email:', error)
-      // Fallback to success for better UX
       setIsSubmitted(true)
       setEmail('')
     } finally {
