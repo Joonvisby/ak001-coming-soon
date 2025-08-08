@@ -57,3 +57,4 @@ npm run dev
 - Colors: Update the color values in the components (currently using `#e04424` for orange and `#1d2d55` for dark blue)
 - Content: Modify the text content in each component
 - Styling: Update Tailwind classes or add custom CSS in `globals.css`
+# ak001-coming-soon
