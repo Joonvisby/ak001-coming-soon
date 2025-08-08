@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { trackEmailSignup } from './lib/analytics'
 
 export default function Contact() {
   const [email, setEmail] = useState('')
@@ -27,6 +28,8 @@ export default function Contact() {
 
       if (response.ok) {
         console.log('Email subscribed successfully:', email)
+        // Track successful email signup
+        trackEmailSignup(email)
         setIsSubmitted(true)
         setEmail('')
       } else {
