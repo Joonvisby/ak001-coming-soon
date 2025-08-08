@@ -77,7 +77,7 @@ export default function Footer() {
           className="border-t border-gray-700 mt-12 pt-8 text-center"
         >
           <p className="text-gray-400">
-            © 2024 Adaptive Kitchen. All rights reserved.
+            © 2025 Adaptive Kitchen. All rights reserved.
           </p>
         </motion.div>
       </div>
