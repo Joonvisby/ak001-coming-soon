@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -21,15 +21,6 @@ export default function Footer() {
               Building the next wave of culture-shaping consumer brands. We bring together culture-savvy strategy, 
               design excellence, and a multi-disciplinary team to create and launch breakthrough ventures.
             </p>
-            <div className="flex space-x-4">
-              <a 
-                href="mailto:info@adaptive.kitchen"
-                className="flex items-center text-gray-300 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                info@adaptive.kitchen
-              </a>
-            </div>
           </motion.div>
 
           {/* Quick Links */}
@@ -62,13 +53,6 @@ export default function Footer() {
           >
             <h4 className="text-lg font-semibold mb-4 text-white">Contact</h4>
             <div className="space-y-3">
-              <a 
-                href="mailto:info@adaptive.kitchen"
-                className="flex items-center text-gray-300 hover:text-white transition-colors"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                info@adaptive.kitchen
-              </a>
               <div className="flex items-center text-gray-300">
                 <MapPin className="w-4 h-4 mr-2" />
                 <span>Global Operations</span>
