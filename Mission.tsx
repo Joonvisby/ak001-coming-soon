@@ -71,7 +71,7 @@ export default function Mission() {
           className="text-center mb-20"
         >
           <h2 className="heading-lg mb-8" style={{ color: '#1d2d55' }}>
-            Our <span className="text-gradient">Mission</span>
+            Our Mission
           </h2>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#1d2d55' }}>
             We create and launch breakthrough ventures that positively impact consumer healthy and wellness. By combining deep cultural insights with design excellence and a team of multi-disciplinary experts, we turn big ideas into thriving brands that transform and enrich people's lifestyles.
