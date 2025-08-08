@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin } from 'lucide-react'
+import { Mail, MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -53,6 +53,13 @@ export default function Footer() {
           >
             <h4 className="text-lg font-semibold mb-4 text-white">Contact</h4>
             <div className="space-y-3">
+              <a 
+                href="mailto:info@adaptive.kitchen"
+                className="flex items-center text-gray-300 hover:text-white transition-colors"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                info@adaptive.kitchen
+              </a>
               <div className="flex items-center text-gray-300">
                 <MapPin className="w-4 h-4 mr-2" />
                 <span>Global Operations</span>
