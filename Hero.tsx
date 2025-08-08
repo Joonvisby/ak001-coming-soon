@@ -32,7 +32,7 @@ export default function Hero() {
 
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#e04424] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        {/* Removed the top-right orange circle */}
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#166af4] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
       </div>
 
