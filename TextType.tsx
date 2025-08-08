@@ -51,7 +51,7 @@ export default function TextType({
     <span className={className}>
       {displayText}
       {showCursor && (
-        <span className="animate-pulse">{cursorCharacter}</span>
+        <span className="animate-cursor-blink">{cursorCharacter}</span>
       )}
     </span>
   )

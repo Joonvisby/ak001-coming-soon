@@ -75,6 +75,19 @@ html {
   }
 }
 
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s infinite;
 }
