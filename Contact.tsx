@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { submitToTally } from './lib/tally'
 
 export default function Contact() {
   const [email, setEmail] = useState('')
@@ -80,8 +79,6 @@ export default function Contact() {
               {isSubmitting ? 'Subscribing...' : isSubmitted ? 'Subscribed!' : 'Subscribe'}
             </button>
           </form>
-          
-
           
           {isSubmitted && (
             <motion.p
