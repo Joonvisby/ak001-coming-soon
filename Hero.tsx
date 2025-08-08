@@ -5,8 +5,8 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import TextType from './TextType'
 
 export default function Hero() {
-  const scrollToMission = () => {
-    document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -73,7 +73,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
-              onClick={scrollToMission}
+              onClick={scrollToContact}
               className="group flex items-center justify-center px-8 py-5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               style={{ 
                 backgroundColor: '#e04424', 
@@ -81,7 +81,7 @@ export default function Hero() {
                 minWidth: '200px'
               }}
             >
-              Our Mission
+              Learn More
               <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
@@ -95,7 +95,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
         <button
-          onClick={scrollToMission}
+          onClick={scrollToContact}
           className="flex flex-col items-center transition-colors text-white drop-shadow-lg"
         >
           <span className="text-sm mb-2">Scroll to explore</span>
