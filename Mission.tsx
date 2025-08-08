@@ -93,7 +93,7 @@ export default function Mission() {
                   <point.icon className="w-8 h-8 text-accent" />
                 </div>
                 
-                <h3 className="heading-md mb-4">
+                <h3 className="heading-md mb-4" style={{ color: '#1d2d55' }}>
                   {point.title}
                 </h3>
                 
