@@ -2,10 +2,34 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 import TextType from './TextType'
 import { trackButtonClick } from './lib/analytics'
 
 export default function Hero() {
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  
+  const videos = [
+    '/videos/Herovideocomp.mp4',
+    '/videos/boomburst.mp4'
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
+    }, 8000) // Switch every 8 seconds
+
+    return () => clearInterval(interval)
+  }, [videos.length])
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load()
+      videoRef.current.play().catch(console.error)
+    }
+  }, [currentVideoIndex])
+
   const scrollToMission = () => {
     document.getElementById('mission')?.scrollIntoView({ behavior: 'smooth' })
     // Track button click
@@ -23,11 +47,13 @@ export default function Hero() {
       {/* Video Background - Fixed sizing */}
       <div className="absolute inset-0 w-full h-full">
         <video
+          ref={videoRef}
+          key={videos[currentVideoIndex]}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-opacity duration-1000"
           style={{ 
             filter: 'brightness(0.3)',
             width: '100%',
@@ -35,14 +61,14 @@ export default function Hero() {
             objectFit: 'cover'
           }}
         >
-          <source src="/videos/Herovideocomp.mp4" type="video/mp4" />
+          <source src={videos[currentVideoIndex]} type="video/mp4" />
         </video>
       </div>
 
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Removed the top-right orange circle */}
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#166af4] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#007BFF] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
       </div>
 
       {/* Content overlay */}
@@ -56,7 +82,7 @@ export default function Hero() {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">
               <TextType 
-                text={["Building the Next Wave of Culture-Shaping Consumer Brands"]}
+                text={["Building the next wave of culture-shaping better for you brands."]}
                 typingSpeed={75}
                 pauseDuration={1500}
                 showCursor={true}
@@ -72,7 +98,7 @@ export default function Hero() {
             className="mb-8"
           >
             <p className="text-xl sm:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed text-white drop-shadow-lg">
-              Adaptive Kitchen is a pioneering venture studio, empowering the next generation of CPG, food, wellness, and lifestyle innovations.
+              Adaptive Kitchen is a pioneering venture studio, We turn bold ideas into everyday essentials transforming how people live, eat, and thrive.
             </p>
           </motion.div>
           <motion.div
@@ -85,7 +111,7 @@ export default function Hero() {
               onClick={scrollToMission}
               className="group flex items-center justify-center px-8 py-5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               style={{ 
-                backgroundColor: '#e04424', 
+                backgroundColor: '#007BFF', 
                 color: 'white',
                 minWidth: '200px'
               }}

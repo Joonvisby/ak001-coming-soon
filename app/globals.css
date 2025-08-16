@@ -24,7 +24,7 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-[#e04424] to-[#c0391e] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#007BFF] to-[#0056b3] bg-clip-text text-transparent;
   }
   
   .card-ag1 {
@@ -38,7 +38,7 @@
   }
   
   .text-accent {
-    @apply text-[#e04424];
+    @apply text-[#007BFF];
   }
 }
 
@@ -48,16 +48,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #1d2d55;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e04424;
+  background: #007BFF;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c0391e;
+  background: #0056b3;
 }
 
 /* Smooth scrolling */

@@ -5,6 +5,11 @@ import GoogleAnalytics from '../components/GoogleAnalytics'
 export const metadata: Metadata = {
   title: 'Adaptive Kitchen - Coming Soon',
   description: 'Building the next wave of culture-shaping consumer brands',
+  icons: [
+    { rel: 'icon', url: '/favicon.svg', type: 'image/svg+xml' },
+    { rel: 'shortcut icon', url: '/favicon.svg' },
+    { rel: 'apple-touch-icon', url: '/favicon.svg' },
+  ],
 }
 
 export default function RootLayout({
