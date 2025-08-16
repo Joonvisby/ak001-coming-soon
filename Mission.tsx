@@ -77,7 +77,7 @@ export default function Mission() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="scale-in group visible cursor-pointer"
+            className="group visible cursor-pointer"
             style={{ transform: 'translateY(0px) scale(1)' }}
           >
             <div
@@ -124,7 +124,7 @@ export default function Mission() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="scale-in group visible cursor-pointer"
+            className="group visible cursor-pointer"
             style={{ transform: 'translateY(0px) scale(1)' }}
           >
             <div
@@ -174,7 +174,7 @@ export default function Mission() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="scale-in group visible cursor-pointer"
+            className="group visible cursor-pointer"
             style={{ transform: 'translateY(0px) scale(1)' }}
           >
             <div
@@ -221,9 +221,9 @@ export default function Mission() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="scale-in group visible cursor-pointer"
+            className="group visible cursor-pointer"
             style={{ transform: 'translateY(0px) scale(1)' }}
-            >
+          >
             <div
               className="relative transform overflow-hidden rounded-2xl p-6 shadow-lg transition-all duration-300 group-hover:scale-105 hover:shadow-xl min-h-[280px]"
               style={{
@@ -239,7 +239,7 @@ export default function Mission() {
                   Purpose-Driven
                 </h3>
                 <p className="mb-4 font-sans text-sm text-white/80">
-                  Every venture we create is built to enhance health, wellness, and enrich people's daily lives.
+                  Every venture we create is built to enhance health, wellness, and enrich people's daily lives through innovative solutions.
                 </p>
                 <div className="flex items-center text-white/60">
                   <svg
