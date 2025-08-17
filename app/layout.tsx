@@ -23,13 +23,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://adaptive.kitchen',
+    url: 'https://www.adaptive.kitchen',
     siteName: 'Adaptive Kitchen',
     title: 'Adaptive Kitchen - Building better for you brands',
     description: 'Building the next wave of culture-shaping consumer brands. We create and launch breakthrough ventures that positively impact consumer health and wellness.',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://www.adaptive.kitchen/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Adaptive Kitchen - Building better for you brands',
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Adaptive Kitchen - Building better for you brands',
     description: 'Building the next wave of culture-shaping consumer brands. We create and launch breakthrough ventures that positively impact consumer health and wellness.',
-    images: ['/og-image.png'],
+    images: ['https://www.adaptive.kitchen/og-image.png'],
     creator: '@adaptivekitchen',
     site: '@adaptivekitchen',
   },
   alternates: {
-    canonical: 'https://adaptive.kitchen',
+    canonical: 'https://www.adaptive.kitchen',
   },
   category: 'Business',
   classification: 'Venture Studio',
