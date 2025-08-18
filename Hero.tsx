@@ -150,22 +150,14 @@ export default function Hero() {
                 Contact
               </motion.button>
 
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                onClick={() => window.open('/admin', '_blank')}
-                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
-              >
-                Admin
-              </motion.button>
+
             </div>
 
             {/* Additional Info */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               className="text-white/70 mt-12 text-lg"
             >
               Building the next wave of culture-shaping brands
