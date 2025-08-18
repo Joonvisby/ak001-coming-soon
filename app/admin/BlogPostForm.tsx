@@ -100,7 +100,8 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
         setFormData(prev => ({ ...prev, contentImages: [...prev.contentImages, result.url] }))
       }
     } catch (error) {
-      setUploadError('Failed to upload image. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      setUploadError(`Failed to upload image: ${errorMessage}`)
       console.error('Upload error:', error)
     } finally {
       setIsUploading(false)
