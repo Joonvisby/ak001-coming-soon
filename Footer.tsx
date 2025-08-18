@@ -66,16 +66,20 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-4 ml-6">
                 <a 
-                  href="#" 
+                  href="https://www.linkedin.com/company/adaptive-kitchen/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a 
-                  href="#" 
+                  href="https://twitter.com/adaptivekitchen"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors"
-                  aria-label="X"
+                  aria-label="X (Twitter)"
                 >
                   <svg 
                     className="w-5 h-5" 
@@ -87,7 +91,9 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a 
-                  href="#" 
+                  href="https://instagram.com/adaptivekitchen"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-300 hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
