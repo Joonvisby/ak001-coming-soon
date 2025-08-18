@@ -1,13 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Menu } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import TextType from './TextType'
 import { trackButtonClick } from './lib/analytics'
 
 export default function Hero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   
   const videos = [
@@ -42,8 +43,137 @@ export default function Hero() {
     trackButtonClick('scroll_indicator')
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+    trackButtonClick('hamburger_menu_button')
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    closeMenu()
+    trackButtonClick(`menu_nav_${sectionId}`)
+  }
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hamburger Menu Button */}
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="absolute top-8 right-8 z-30 p-3 bg-[#007BFF] hover:bg-[#0056b3] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+        onClick={toggleMenu}
+        aria-label="Open menu"
+      >
+        <Menu className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+      </motion.button>
+
+      {/* Navigation Menu Overlay */}
+      {isMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40 flex items-center justify-center"
+          onClick={closeMenu}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-center max-w-2xl mx-auto p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeMenu}
+              className="absolute top-8 right-8 p-3 text-white hover:text-[#007BFF] transition-colors duration-300"
+              aria-label="Close menu"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Menu Title */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-4xl md:text-5xl font-bold mb-6 text-white"
+            >
+              Navigation
+            </motion.h2>
+
+            {/* Blue Line */}
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full mb-12"
+            />
+
+            {/* Menu Items */}
+            <div className="space-y-8">
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                onClick={() => scrollToSection('mission')}
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+              >
+                Mission
+              </motion.button>
+
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                onClick={() => scrollToSection('blog')}
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+              >
+                Insights
+              </motion.button>
+
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                onClick={() => scrollToSection('contact')}
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+              >
+                Contact
+              </motion.button>
+
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                onClick={() => window.open('/admin', '_blank')}
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+              >
+                Admin
+              </motion.button>
+            </div>
+
+            {/* Additional Info */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="text-white/70 mt-12 text-lg"
+            >
+              Building the next wave of culture-shaping brands
+            </motion.p>
+          </motion.div>
+        </motion.div>
+      )}
+
       {/* Video Background - Fixed sizing */}
       <div className="absolute inset-0 w-full h-full">
         <video

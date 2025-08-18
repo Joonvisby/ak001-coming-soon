@@ -1,5 +1,6 @@
 import Hero from '../Hero'
 import Mission from '../Mission'
+import Blog from '../Blog'
 import Contact from '../Contact'
 import Footer from '../Footer'
 
@@ -46,6 +47,7 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <Mission />
+        <Blog />
         <Contact />
         <Footer />
       </main>
