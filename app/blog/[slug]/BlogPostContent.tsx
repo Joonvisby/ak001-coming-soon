@@ -89,18 +89,18 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               {post.title}
             </h1>
             
-            <div className="flex items-center gap-6 text-gray-600 mb-6">
+            <div className="flex flex-wrap items-center gap-3 md:gap-6 text-gray-600 mb-6">
               <div className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
-                <span>{post.date}</span>
+                <Calendar className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">{post.date}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5" />
-                <span>{post.readTime}</span>
+                <Clock className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">{post.readTime}</span>
               </div>
               <div className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5" />
-                <span>By {post.author}</span>
+                <BookOpen className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="text-sm md:text-base">By {post.author}</span>
               </div>
             </div>
 
