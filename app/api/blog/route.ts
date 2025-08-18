@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { kv } from '@vercel/kv'
+import { createClient } from 'redis'
 
 export async function GET() {
   try {
-    const posts = await kv.get('blog_posts') || []
+    const redis = createClient({
+      url: process.env.REDIS_URL
+    })
+    
+    await redis.connect()
+    const postsData = await redis.get('blog_posts')
+    await redis.disconnect()
+    
+    const posts = postsData ? JSON.parse(postsData) : []
     return NextResponse.json({ posts })
   } catch (error) {
     console.error('Error fetching blog posts:', error)
@@ -27,14 +35,21 @@ export async function POST(request: NextRequest) {
       slug: postData.slug || postData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
     }
 
+    const redis = createClient({
+      url: process.env.REDIS_URL
+    })
+    
+    await redis.connect()
+    
     // Get existing posts
-    const existingPosts = await kv.get('blog_posts') || []
+    const existingPosts = await redis.get('blog_posts') || []
     
     // Add new post
     const updatedPosts = [newPost, ...existingPosts]
     
-    // Save to KV
-    await kv.set('blog_posts', updatedPosts)
+    // Save to Redis
+    await redis.set('blog_posts', JSON.stringify(updatedPosts))
+    await redis.disconnect()
     
     return NextResponse.json({ 
       success: true, 

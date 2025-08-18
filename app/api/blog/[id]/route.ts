@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { kv } from '@vercel/kv'
+import { createClient } from 'redis'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const posts = await kv.get('blog_posts') || []
+    const redis = createClient({
+      url: process.env.REDIS_URL
+    })
+    
+    await redis.connect()
+    const postsData = await redis.get('blog_posts')
+    await redis.disconnect()
+    
+    const posts = postsData ? JSON.parse(postsData) : []
     const post = posts.find((p: any) => p.id === params.id || p.slug === params.id)
     
     if (!post) {
@@ -32,10 +40,18 @@ export async function PUT(
 ) {
   try {
     const updateData = await request.json()
-    const posts = await kv.get('blog_posts') || []
+    
+    const redis = createClient({
+      url: process.env.REDIS_URL
+    })
+    
+    await redis.connect()
+    const postsData = await redis.get('blog_posts')
+    const posts = postsData ? JSON.parse(postsData) : []
     
     const postIndex = posts.findIndex((p: any) => p.id === params.id)
     if (postIndex === -1) {
+      await redis.disconnect()
       return NextResponse.json(
         { error: 'Blog post not found' },
         { status: 404 }
@@ -49,8 +65,9 @@ export async function PUT(
       updatedAt: new Date().toISOString()
     }
     
-    // Save to KV
-    await kv.set('blog_posts', posts)
+    // Save to Redis
+    await redis.set('blog_posts', JSON.stringify(posts))
+    await redis.disconnect()
     
     return NextResponse.json({ 
       success: true, 
@@ -71,11 +88,19 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const posts = await kv.get('blog_posts') || []
+    const redis = createClient({
+      url: process.env.REDIS_URL
+    })
+    
+    await redis.connect()
+    const postsData = await redis.get('blog_posts')
+    const posts = postsData ? JSON.parse(postsData) : []
+    
     const filteredPosts = posts.filter((p: any) => p.id !== params.id)
     
-    // Save to KV
-    await kv.set('blog_posts', filteredPosts)
+    // Save to Redis
+    await redis.set('blog_posts', JSON.stringify(filteredPosts))
+    await redis.disconnect()
     
     return NextResponse.json({ 
       success: true,
