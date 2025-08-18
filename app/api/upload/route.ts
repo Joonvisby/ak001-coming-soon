@@ -40,7 +40,14 @@ export async function POST(request: NextRequest) {
 
     // Upload to Vercel Blob
     console.log('Attempting to upload to Vercel Blob...')
-    const blob = await put(file.name, file, {
+    
+    // Generate unique filename to prevent conflicts
+    const timestamp = Date.now()
+    const randomSuffix = Math.random().toString(36).substring(2, 8)
+    const fileExtension = file.name.split('.').pop()
+    const uniqueFileName = `${timestamp}_${randomSuffix}.${fileExtension}`
+    
+    const blob = await put(uniqueFileName, file, {
       access: 'public',
     })
     console.log('Upload successful:', blob.url)
