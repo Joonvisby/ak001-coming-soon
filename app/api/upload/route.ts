@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       url: blob.url,
-      size: blob.size,
       uploadedAt: blob.uploadedAt,
     })
   } catch (error) {
