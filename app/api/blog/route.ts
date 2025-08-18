@@ -36,10 +36,12 @@ export async function GET(request: NextRequest) {
     if (slug) {
       // Fetch specific post by slug
       console.log(`GET /api/blog?slug=${slug} - Fetching specific blog post`)
+      console.log(`Available posts:`, posts.map(p => ({ slug: p.slug, title: p.title })))
       
       const post = posts.find(p => p.slug === slug)
       if (!post) {
         console.log(`Post with slug ${slug} not found`)
+        console.log(`Available slugs:`, posts.map(p => p.slug))
         return NextResponse.json({ error: 'Post not found' }, { status: 404 })
       }
       

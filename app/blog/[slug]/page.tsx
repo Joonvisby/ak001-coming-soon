@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   let post = null
   
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?slug=${params.slug}`)
+    const response = await fetch(`/api/blog?slug=${params.slug}`, { cache: 'no-store' })
     if (response.ok) {
       const data = await response.json()
       post = data.post
@@ -59,7 +59,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   let post = null
   
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?slug=${params.slug}`)
+    const response = await fetch(`/api/blog?slug=${params.slug}`, { cache: 'no-store' })
     if (response.ok) {
       const data = await response.json()
       post = data.post
