@@ -24,7 +24,7 @@ interface BlogPostData {
   contentImages: string[]
 }
 
-export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditing = false }: BlogPostFormProps) {
+export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditing = false, existingCategories, existingTags }: BlogPostFormProps) {
   const [formData, setFormData] = useState<BlogPostData>({
     title: initialData?.title || '',
     excerpt: initialData?.excerpt || '',
