@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Plus, Edit, Eye, Trash2, Search, Filter, Calendar, Clock, Tag, User, BarChart3, TrendingUp, FileText, Users, LogOut } from 'lucide-react'
 import LoginForm from './LoginForm'
 import BlogPostForm from './BlogPostForm'
+import { getBlogPosts } from '../../lib/blog-data'
 
 interface BlogPost {
   id: string
@@ -59,12 +60,27 @@ export default function AdminDashboard() {
   const loadBlogPosts = async () => {
     try {
       setIsLoading(true)
+      
+      // Load posts from API (newly created posts)
       const response = await fetch('/api/blog')
-      if (!response.ok) {
-        throw new Error('Failed to fetch blog posts')
+      let apiPosts = []
+      if (response.ok) {
+        const data = await response.json()
+        apiPosts = data.posts || []
       }
-      const data = await response.json()
-      setBlogPosts(data.posts)
+      
+      // Load static posts (existing 6 posts)
+      const staticPosts = getBlogPosts()
+      
+      // Combine both sources, prioritizing API posts (newer)
+      const allPosts = [...apiPosts, ...staticPosts]
+      
+      // Remove duplicates based on title
+      const uniquePosts = allPosts.filter((post, index, self) => 
+        index === self.findIndex(p => p.title === post.title)
+      )
+      
+      setBlogPosts(uniquePosts)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {

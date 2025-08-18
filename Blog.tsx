@@ -2,12 +2,48 @@
 
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { event, trackButtonClick } from './lib/analytics'
-import { getBlogPosts } from './lib/blog-data'
 
 export default function Blog() {
+  const [blogPosts, setBlogPosts] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        // Fetch from API (admin-created posts)
+        const response = await fetch('/api/blog')
+        let apiPosts = []
+        if (response.ok) {
+          const data = await response.json()
+          apiPosts = data.posts || []
+        }
+        
+        // Import static posts (existing 6 posts)
+        const { getBlogPosts } = await import('./lib/blog-data')
+        const staticPosts = getBlogPosts()
+        
+        // Combine both sources, prioritizing API posts (newer)
+        const allPosts = [...apiPosts, ...staticPosts]
+        
+        // Remove duplicates based on title
+        const uniquePosts = allPosts.filter((post, index, self) => 
+          index === self.findIndex(p => p.title === post.title)
+        )
+        
+        setBlogPosts(uniquePosts)
+      } catch (err) {
+        console.error('Error fetching blog posts:', err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchBlogPosts()
+  }, [])
+
   useEffect(() => {
     // Track when blog section comes into view
     const observer = new IntersectionObserver(
@@ -39,8 +75,6 @@ export default function Blog() {
     // Navigation is handled by Link component
   }
 
-  const blogPosts = getBlogPosts()
-
   return (
     <section id="blog" className="py-32 bg-gray-100">
       <div className="container-custom">
@@ -61,8 +95,14 @@ export default function Blog() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {blogPosts.slice(3, 6).map((post, index) => {
+        {isLoading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading latest insights...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {blogPosts.slice(3, 6).map((post: any, index: number) => {
             return (
               <motion.article
                 key={post.id}
@@ -123,8 +163,9 @@ export default function Blog() {
                 </Link>
               </motion.article>
             )
-          })}
-        </div>
+                      })}
+          </div>
+        )}
 
         {/* View All Blogs Button */}
         <motion.div

@@ -1,4 +1,3 @@
-import { getBlogPosts } from '../../lib/blog-data'
 import { Metadata } from 'next'
 import BlogListingContent from './BlogListingContent'
 
@@ -27,7 +26,5 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  const blogPosts = getBlogPosts()
-  
-  return <BlogListingContent blogPosts={blogPosts} />
+  return <BlogListingContent />
 }

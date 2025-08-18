@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowRight, BookOpen, ArrowLeft } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { event, trackButtonClick } from '../../lib/analytics'
 import Footer from '../../Footer'
@@ -21,7 +21,45 @@ interface BlogPost {
   tags?: string[]
 }
 
-export default function BlogListingContent({ blogPosts }: { blogPosts: BlogPost[] }) {
+export default function BlogListingContent() {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        // Fetch from API (admin-created posts)
+        const response = await fetch('/api/blog')
+        let apiPosts = []
+        if (response.ok) {
+          const data = await response.json()
+          apiPosts = data.posts || []
+        }
+        
+        // Import static posts (existing 6 posts)
+        const { getBlogPosts } = await import('../../lib/blog-data')
+        const staticPosts = getBlogPosts()
+        
+        // Combine both sources, prioritizing API posts (newer)
+        const allPosts = [...apiPosts, ...staticPosts]
+        
+        // Remove duplicates based on title
+        const uniquePosts = allPosts.filter((post, index, self) => 
+          index === self.findIndex(p => p.title === post.title)
+        )
+        
+        setBlogPosts(uniquePosts)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchBlogPosts()
+  }, [])
+
   useEffect(() => {
     // Track when blog page comes into view
     const observer = new IntersectionObserver(
@@ -85,8 +123,24 @@ export default function BlogListingContent({ blogPosts }: { blogPosts: BlogPost[
 
       {/* Blog Posts Grid */}
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => {
+        {isLoading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading blog posts...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+              <p className="text-red-600">Error loading blog posts: {error}</p>
+            </div>
+          </div>
+        ) : blogPosts.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600">No blog posts found.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post, index) => {
             return (
               <motion.article
                 key={post.id}
@@ -147,8 +201,9 @@ export default function BlogListingContent({ blogPosts }: { blogPosts: BlogPost[
                 </Link>
               </motion.article>
             )
-          })}
-        </div>
+                      })}
+          </div>
+        )}
       </div>
       
       {/* Footer */}

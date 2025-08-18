@@ -1,10 +1,26 @@
-import { getBlogPostBySlug } from '../../../lib/blog-data'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import BlogPostContent from './BlogPostContent'
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getBlogPostBySlug(params.slug)
+  // Try to get post from API first, then fallback to static data
+  let post = null
+  
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`)
+    if (response.ok) {
+      const data = await response.json()
+      post = data.posts?.find((p: any) => p.slug === params.slug)
+    }
+  } catch (error) {
+    console.error('Error fetching post from API:', error)
+  }
+  
+  // Fallback to static data
+  if (!post) {
+    const { getBlogPostBySlug } = await import('../../../lib/blog-data')
+    post = getBlogPostBySlug(params.slug)
+  }
   
   if (!post) {
     return {
@@ -38,8 +54,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getBlogPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  // Try to get post from API first, then fallback to static data
+  let post = null
+  
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`)
+    if (response.ok) {
+      const data = await response.json()
+      post = data.posts?.find((p: any) => p.slug === params.slug)
+    }
+  } catch (error) {
+    console.error('Error fetching post from API:', error)
+  }
+  
+  // Fallback to static data
+  if (!post) {
+    const { getBlogPostBySlug } = await import('../../../lib/blog-data')
+    post = getBlogPostBySlug(params.slug)
+  }
 
   if (!post) {
     notFound()
