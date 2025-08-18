@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Edit, Eye, Trash2, Search, Filter, Calendar, Clock, Tag, User, BarChart3, TrendingUp, FileText, Users } from 'lucide-react'
+import { Plus, Edit, Eye, Trash2, Search, Filter, Calendar, Clock, Tag, User, BarChart3, TrendingUp, FileText, Users, LogOut } from 'lucide-react'
+import LoginForm from './LoginForm'
 
 interface BlogPost {
   id: string
@@ -18,6 +19,7 @@ interface BlogPost {
 }
 
 export default function AdminDashboard() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -30,8 +32,28 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview')
 
   useEffect(() => {
-    loadBlogPosts()
+    // Check if user is already authenticated
+    const authStatus = sessionStorage.getItem('adminAuthenticated')
+    if (authStatus === 'true') {
+      setIsAuthenticated(true)
+      loadBlogPosts()
+    }
   }, [])
+
+  const handleLogin = () => {
+    setIsAuthenticated(true)
+    loadBlogPosts()
+  }
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminAuthenticated')
+    setIsAuthenticated(false)
+    setBlogPosts([])
+    setSelectedPost(null)
+    setIsFormOpen(false)
+    setIsViewerOpen(false)
+    setEditingPost(null)
+  }
 
   const loadBlogPosts = async () => {
     try {
@@ -86,6 +108,11 @@ export default function AdminDashboard() {
   const categories = Array.from(new Set(blogPosts.map(post => post.category)))
   const totalViews = 0 // Placeholder for future analytics
   const monthlyGrowth = 12.5 // Placeholder for future analytics
+
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={handleLogin} />
+  }
 
   if (isLoading) {
     return (
@@ -166,13 +193,22 @@ export default function AdminDashboard() {
               <h1 className="text-4xl font-bold text-gray-900 mb-2">Blog Dashboard</h1>
               <p className="text-lg text-gray-600">Manage your content and track performance</p>
             </div>
-            <button
-              onClick={() => setIsFormOpen(true)}
-              className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              <Plus className="h-5 w-5" />
-              New Post
-            </button>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setIsFormOpen(true)}
+                className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                <Plus className="h-5 w-5" />
+                New Post
+              </button>
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-2 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors"
+                title="Logout"
+              >
+                <LogOut className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
 
