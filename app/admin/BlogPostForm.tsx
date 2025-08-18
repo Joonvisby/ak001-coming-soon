@@ -38,8 +38,48 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
   })
 
   // Pre-populated options
-  const defaultCategories = ['Business', 'Technology', 'Consumer Brands', 'Venture Building', 'CPG', 'Innovation', 'Strategy', 'Market Trends']
-  const defaultTags = ['Venture Studio', 'Consumer Brands', 'CPG', 'Innovation', 'Strategy', 'Market Research', 'Brand Building', 'Startup', 'Investment', 'Growth', 'Sustainability', 'Digital Marketing', 'E-commerce', 'Food & Beverage', 'Health & Wellness']
+  const defaultCategories = [
+    'Venture Building', 
+    'Consumer Brands', 
+    'CPG', 
+    'Innovation', 
+    'Strategy', 
+    'Market Trends', 
+    'Business', 
+    'Technology', 
+    'Startup', 
+    'Investment', 
+    'Growth', 
+    'Sustainability'
+  ]
+  const defaultTags = [
+    'Venture Studio', 
+    'Consumer Brands', 
+    'CPG', 
+    'Innovation', 
+    'Strategy', 
+    'Market Research', 
+    'Brand Building', 
+    'Startup', 
+    'Investment', 
+    'Growth', 
+    'Sustainability', 
+    'Digital Marketing', 
+    'E-commerce', 
+    'Food & Beverage', 
+    'Health & Wellness',
+    'Venture Capital',
+    'Product Development',
+    'Market Entry',
+    'Brand Strategy',
+    'Consumer Insights',
+    'Retail',
+    'DTC',
+    'Supply Chain',
+    'Packaging',
+    'Regulatory',
+    'International Expansion'
+  ]
   
   const categories = existingCategories || defaultCategories
   const availableTags = existingTags || defaultTags
@@ -57,6 +97,13 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
       const wordCount = (value as string).split(/\s+/).filter(word => word.length > 0).length
       const readingTime = Math.ceil(wordCount / 200) // Average reading speed: 200 words per minute
       setFormData(prev => ({ ...prev, readTime: `${readingTime} min read` }))
+      
+      // Auto-generate excerpt from content
+      if (value && typeof value === 'string' && value.length > 50) {
+        const words = value.split(/\s+/).slice(0, 25).join(' ') // First 25 words
+        const excerpt = words.length < value.length ? words + '...' : words
+        setFormData(prev => ({ ...prev, excerpt }))
+      }
     }
   }
 
@@ -321,15 +368,31 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
 
           {/* Excerpt */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt *</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-sm font-medium text-gray-700">Excerpt *</label>
+              <button
+                type="button"
+                onClick={() => {
+                  if (formData.content) {
+                    const words = formData.content.split(/\s+/).slice(0, 25).join(' ')
+                    const excerpt = words.length < formData.content.length ? words + '...' : words
+                    setFormData(prev => ({ ...prev, excerpt }))
+                  }
+                }}
+                className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+              >
+                Regenerate
+              </button>
+            </div>
             <textarea
               value={formData.excerpt}
               onChange={(e) => handleInputChange('excerpt', e.target.value)}
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-              placeholder="Brief summary of the post"
+              placeholder="Auto-generated from content (you can edit)"
               required
             />
+            <p className="text-xs text-gray-500 mt-1">Auto-generated from your content - edit as needed</p>
           </div>
 
           {/* Content Images Section */}
