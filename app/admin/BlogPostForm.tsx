@@ -8,6 +8,8 @@ interface BlogPostFormProps {
   onCancel: () => void
   initialData?: Partial<BlogPostData>
   isEditing?: boolean
+  existingCategories?: string[]
+  existingTags?: string[]
 }
 
 interface BlogPostData {
@@ -35,6 +37,13 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
     contentImages: initialData?.contentImages || [],
   })
 
+  // Pre-populated options
+  const defaultCategories = ['Business', 'Technology', 'Consumer Brands', 'Venture Building', 'CPG', 'Innovation', 'Strategy', 'Market Trends']
+  const defaultTags = ['Venture Studio', 'Consumer Brands', 'CPG', 'Innovation', 'Strategy', 'Market Research', 'Brand Building', 'Startup', 'Investment', 'Growth', 'Sustainability', 'Digital Marketing', 'E-commerce', 'Food & Beverage', 'Health & Wellness']
+  
+  const categories = existingCategories || defaultCategories
+  const availableTags = existingTags || defaultTags
+
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -42,6 +51,13 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
 
   const handleInputChange = (field: keyof BlogPostData, value: string | string[]) => {
     setFormData(prev => ({ ...prev, [field]: value }))
+    
+    // Auto-calculate read time when content changes
+    if (field === 'content') {
+      const wordCount = (value as string).split(/\s+/).filter(word => word.length > 0).length
+      const readingTime = Math.ceil(wordCount / 200) // Average reading speed: 200 words per minute
+      setFormData(prev => ({ ...prev, readTime: `${readingTime} min read` }))
+    }
   }
 
   const handleTagInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -193,14 +209,17 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-              <input
-                type="text"
+              <select
                 value={formData.category}
                 onChange={(e) => handleInputChange('category', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-                placeholder="e.g., Business, Technology"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
                 required
-              />
+              >
+                <option value="">Select a category</option>
+                {categories.map(category => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
             </div>
           </div>
 
@@ -211,10 +230,12 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
                 type="text"
                 value={formData.readTime}
                 onChange={(e) => handleInputChange('readTime', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-                placeholder="e.g., 5 min read"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500 bg-gray-50"
+                placeholder="Auto-calculated based on content"
                 required
+                readOnly
               />
+              <p className="text-xs text-gray-500 mt-1">Automatically calculated from your content</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Author *</label>
@@ -229,12 +250,38 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
-              <input
-                type="text"
-                onKeyDown={handleTagInput}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-                placeholder="Press Enter to add tags"
-              />
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  onKeyDown={handleTagInput}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                  placeholder="Type custom tags or press Enter to add"
+                />
+                <div>
+                  <p className="text-xs text-gray-500 mb-2">Quick add common tags:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {availableTags.map(tag => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => {
+                          if (!formData.tags.includes(tag)) {
+                            setFormData(prev => ({ ...prev, tags: [...prev.tags, tag] }))
+                          }
+                        }}
+                        disabled={formData.tags.includes(tag)}
+                        className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+                          formData.tags.includes(tag)
+                            ? 'bg-blue-100 text-blue-800 border-blue-200 cursor-not-allowed'
+                            : 'bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200'
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

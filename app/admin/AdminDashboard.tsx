@@ -487,6 +487,8 @@ export default function AdminDashboard() {
             }}
             initialData={editingPost || undefined}
             isEditing={!!editingPost}
+            existingCategories={Array.from(new Set(blogPosts.map(post => post.category)))}
+            existingTags={Array.from(new Set(blogPosts.flatMap(post => post.tags || [])))}
           />
         </div>
       )}
