@@ -1,6 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from 'redis'
 
+interface BlogPost {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  category: string
+  readTime: string
+  author: string
+  tags: string[]
+  image: string
+  contentImages: string[]
+  date: string
+  createdAt: string
+  updatedAt: string
+  slug: string
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -14,8 +31,8 @@ export async function GET(
     const postsData = await redis.get('blog_posts')
     await redis.disconnect()
     
-    const posts = postsData ? JSON.parse(postsData) : []
-    const post = posts.find((p: any) => p.id === params.id || p.slug === params.id)
+    const posts: BlogPost[] = postsData ? JSON.parse(postsData) : []
+    const post = posts.find((p: BlogPost) => p.id === params.id || p.slug === params.id)
     
     if (!post) {
       return NextResponse.json(
@@ -47,9 +64,9 @@ export async function PUT(
     
     await redis.connect()
     const postsData = await redis.get('blog_posts')
-    const posts = postsData ? JSON.parse(postsData) : []
+    const posts: BlogPost[] = postsData ? JSON.parse(postsData) : []
     
-    const postIndex = posts.findIndex((p: any) => p.id === params.id)
+    const postIndex = posts.findIndex((p: BlogPost) => p.id === params.id)
     if (postIndex === -1) {
       await redis.disconnect()
       return NextResponse.json(
@@ -94,9 +111,9 @@ export async function DELETE(
     
     await redis.connect()
     const postsData = await redis.get('blog_posts')
-    const posts = postsData ? JSON.parse(postsData) : []
+    const posts: BlogPost[] = postsData ? JSON.parse(postsData) : []
     
-    const filteredPosts = posts.filter((p: any) => p.id !== params.id)
+    const filteredPosts = posts.filter((p: BlogPost) => p.id !== params.id)
     
     // Save to Redis
     await redis.set('blog_posts', JSON.stringify(filteredPosts))
