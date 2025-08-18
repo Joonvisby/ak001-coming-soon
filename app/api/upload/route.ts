@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       url: blob.url,
-      uploadedAt: blob.uploadedAt,
     })
   } catch (error) {
     console.error('Upload error:', error)
