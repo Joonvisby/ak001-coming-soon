@@ -37,7 +37,7 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
     contentImages: initialData?.contentImages || [],
   })
 
-  // Pre-populated options
+  // Pre-populated options - always available
   const defaultCategories = [
     'Venture Building', 
     'Consumer Brands', 
@@ -52,6 +52,7 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
     'Growth', 
     'Sustainability'
   ]
+  
   const defaultTags = [
     'Venture Studio', 
     'Consumer Brands', 
@@ -81,8 +82,11 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
     'International Expansion'
   ]
   
-  const categories = existingCategories || defaultCategories
-  const availableTags = existingTags || defaultTags
+  const categories = existingCategories && existingCategories.length > 0 ? existingCategories : defaultCategories
+  const availableTags = existingTags && existingTags.length > 0 ? existingTags : defaultTags
+  
+  // Debug logging
+  console.log('BlogPostForm props:', { existingCategories, existingTags, categories, availableTags })
 
   const [isUploading, setIsUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
