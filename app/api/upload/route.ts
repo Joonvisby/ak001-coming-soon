@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(request: NextRequest) {
   try {
     console.log('Upload API called')
-    console.log('Environment check - BLOB_READ_WRITE_TOKEN exists:', !!process.env.BLOB_READ_WRITE_TOKEN)
+    console.log('Environment check - BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN exists:', !!process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN)
     
     const formData = await request.formData()
     const file = formData.get('file') as File
