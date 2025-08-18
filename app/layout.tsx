@@ -5,20 +5,23 @@ import GoogleAnalytics from '../components/GoogleAnalytics'
 export const metadata: Metadata = {
   title: 'Adaptive Kitchen - Building better for you brands',
   description: 'Building the next wave of culture-shaping consumer brands. We create and launch breakthrough ventures that positively impact consumer health and wellness.',
-  keywords: 'venture studio, consumer brands, CPG, food innovation, wellness brands, lifestyle brands, brand strategy, consumer health',
+  keywords: 'venture studio, consumer brands, CPG, food innovation, wellness brands, lifestyle brands, brand strategy, consumer health, adaptive kitchen, better for you brands, consumer wellness, food technology, lifestyle innovation',
   authors: [{ name: 'Adaptive Kitchen' }],
   creator: 'Adaptive Kitchen',
   publisher: 'Adaptive Kitchen',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+      robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
+  verification: {
+    google: 'your-google-verification-code-here',
   },
   openGraph: {
     type: 'website',
