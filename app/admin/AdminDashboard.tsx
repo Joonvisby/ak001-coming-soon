@@ -84,19 +84,71 @@ export default function AdminDashboard() {
 
   const handleDeletePost = async (postId: string) => {
     if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
-      // In a real app, you'd make an API call here
-      setBlogPosts(prev => prev.filter(post => post.id !== postId))
-      alert('Post deleted successfully!')
+      try {
+        const response = await fetch(`/api/blog/${postId}`, {
+          method: 'DELETE',
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to delete blog post')
+        }
+
+        // Remove from local state
+        setBlogPosts(prev => prev.filter(post => post.id !== postId))
+        alert('Post deleted successfully!')
+      } catch (error) {
+        console.error('Error deleting post:', error)
+        alert('Failed to delete post. Please try again.')
+      }
     }
   }
 
   const handleFormSubmit = async (data: any) => {
-    // In a real app, you'd make an API call here
-    console.log('Form data:', data)
-    alert('Post saved successfully!')
-    setIsFormOpen(false)
-    setEditingPost(null)
-    loadBlogPosts()
+    try {
+      console.log('Form data:', data)
+      
+      // Prepare post data
+      const postData = {
+        title: data.title,
+        excerpt: data.excerpt,
+        content: data.content,
+        category: data.category,
+        readTime: data.readTime,
+        author: data.author,
+        tags: data.tags,
+        image: data.featuredImage,
+        contentImages: data.contentImages,
+        date: new Date().toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric' 
+        })
+      }
+
+      // Create blog post via API
+      const response = await fetch('/api/blog', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to create blog post')
+      }
+
+      const result = await response.json()
+      console.log('Post created:', result)
+      
+      alert('Post saved successfully!')
+      setIsFormOpen(false)
+      setEditingPost(null)
+      loadBlogPosts()
+    } catch (error) {
+      console.error('Error creating post:', error)
+      alert('Failed to save post. Please try again.')
+    }
   }
 
   const filteredPosts = blogPosts.filter(post => {
