@@ -58,6 +58,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pr-12 text-gray-900 placeholder-gray-500"
                   placeholder="Enter password"
+                  style={{ color: '#111827' }}
                   required
                   autoFocus
                 />
