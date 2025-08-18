@@ -7,10 +7,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   let post = null
   
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?slug=${params.slug}`)
     if (response.ok) {
       const data = await response.json()
-      post = data.posts?.find((p: any) => p.slug === params.slug)
+      post = data.post
     }
   } catch (error) {
     console.error('Error fetching post from API:', error)
@@ -59,10 +59,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   let post = null
   
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blog?slug=${params.slug}`)
     if (response.ok) {
       const data = await response.json()
-      post = data.posts?.find((p: any) => p.slug === params.slug)
+      post = data.post
     }
   } catch (error) {
     console.error('Error fetching post from API:', error)

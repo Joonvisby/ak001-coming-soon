@@ -18,8 +18,11 @@ interface BlogPost {
   slug: string
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url)
+    const slug = searchParams.get('slug')
+    
     const redis = createClient({
       url: process.env.REDIS_URL
     })
@@ -29,6 +32,24 @@ export async function GET() {
     await redis.disconnect()
     
     const posts: BlogPost[] = postsData ? JSON.parse(postsData) : []
+    
+    if (slug) {
+      // Fetch specific post by slug
+      console.log(`GET /api/blog?slug=${slug} - Fetching specific blog post`)
+      
+      const post = posts.find(p => p.slug === slug)
+      if (!post) {
+        console.log(`Post with slug ${slug} not found`)
+        return NextResponse.json({ error: 'Post not found' }, { status: 404 })
+      }
+      
+      console.log(`Found post: ${post.title}`)
+      return NextResponse.json({ post })
+    }
+    
+    // Fetch all blog posts
+    console.log('GET /api/blog - Fetching all blog posts')
+    console.log(`Found ${posts.length} blog posts`)
     return NextResponse.json({ posts })
   } catch (error) {
     console.error('Error fetching blog posts:', error)
