@@ -80,19 +80,28 @@ export default function BlogPostForm({ onSubmit, onCancel, initialData, isEditin
     setUploadError('')
 
     try {
+      console.log('Starting upload for:', type, file.name, file.size, file.type)
+      
       const formData = new FormData()
       formData.append('file', file)
 
+      console.log('FormData created, sending request to /api/upload')
+      
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       })
 
+      console.log('Response received:', response.status, response.statusText)
+
       if (!response.ok) {
-        throw new Error('Upload failed')
+        const errorText = await response.text()
+        console.error('Response error text:', errorText)
+        throw new Error(`Upload failed: ${response.status} ${response.statusText}`)
       }
 
       const result = await response.json()
+      console.log('Upload result:', result)
 
       if (type === 'featured') {
         setFormData(prev => ({ ...prev, featuredImage: result.url }))
