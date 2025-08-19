@@ -20,7 +20,7 @@ export default function Footer() {
               <img 
                 src="/AKWhiteTranP.svg" 
                 alt="Adaptive Kitchen" 
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
