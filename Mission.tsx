@@ -2,8 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Target, Users, Globe, Heart, ArrowRight } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { event, trackButtonClick } from './lib/analytics'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from './components/ui/accordion'
 
 
 
@@ -39,6 +45,9 @@ export default function Mission() {
     trackButtonClick('mission_learn_more_button')
   }
 
+  const [activeTabId, setActiveTabId] = useState<number>(1)
+  const [activeImage, setActiveImage] = useState("https://shadcnblocks.com/images/block/placeholder-1.svg")
+
   return (
     <section id="mission" className="py-32 bg-background">
       <div className="container-custom">
@@ -55,6 +64,84 @@ export default function Mission() {
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
             We turn everyday into better days by designing adaptive innovations that fit real life, spark joy, and move people forward.
           </p>
+        </motion.div>
+
+        {/* Mission Pillars Accordion Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
+              Mission Pillars
+            </h3>
+            <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="container mx-auto">
+            <div className="mb-12 flex w-full items-start justify-between gap-12">
+              <div className="w-full md:w-1/2">
+                <Accordion type="single" className="w-full" defaultValue="item-1">
+                  {[
+                    {
+                      id: 1,
+                      title: "Innovation-Forward",
+                      image: "https://shadcnblocks.com/images/block/placeholder-1.svg",
+                      description: "We don't just re-invent products, we reinvent lifestyles to transform not just how we eat, but transform how customers pursue happiness and health."
+                    },
+                    {
+                      id: 2,
+                      title: "User-Focused",
+                      image: "https://shadcnblocks.com/images/block/placeholder-2.svg",
+                      description: "We see what others miss. By spotting the gaps and opportunities in the market, we build category defining solutions that shift how food, wellness, and lifestyle are experienced."
+                    },
+                    {
+                      id: 3,
+                      title: "Purpose-Driven",
+                      image: "https://shadcnblocks.com/images/block/placeholder-3.svg",
+                      description: "Every choice shapes the future. We bring adaptive innovations that empower modern consumers to have access to healthier innovative options, live for fulfillment, and enjoy making memories with loved ones with out the guilt and worry from bad-for-you foods."
+                    }
+                  ].map((tab) => (
+                    <AccordionItem key={tab.id} value={`item-${tab.id}`}>
+                      <AccordionTrigger
+                        onClick={() => {
+                          setActiveImage(tab.image)
+                          setActiveTabId(tab.id)
+                        }}
+                        className="cursor-pointer py-5 !no-underline transition"
+                      >
+                        <h6 className={`text-xl font-semibold ${tab.id === activeTabId ? "text-gray-900" : "text-gray-600"}`}>
+                          {tab.title}
+                        </h6>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="mt-3 text-gray-600">
+                          {tab.description}
+                        </p>
+                        <div className="mt-4 md:hidden">
+                          <img
+                            src={tab.image}
+                            alt={tab.title}
+                            className="h-full max-h-80 w-full rounded-md object-cover"
+                          />
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+              <div className="relative m-auto hidden w-1/2 overflow-hidden rounded-xl bg-gray-100 md:block h-[280px] lg:h-[320px]">
+                <img
+                  src={activeImage}
+                  alt="Mission pillar preview"
+                  className="h-full w-full rounded-md object-contain p-4"
+                />
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
