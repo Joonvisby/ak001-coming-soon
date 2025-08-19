@@ -204,7 +204,7 @@ export default function Hero() {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">
               <TextType 
-                text={["Building the next wave of culture-shaping better for you brands."]}
+                text={["Building the next wave of culture shaping better-for-you brands."]}
                 typingSpeed={75}
                 pauseDuration={1500}
                 showCursor={true}
@@ -213,16 +213,7 @@ export default function Hero() {
               />
             </h1>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
-          >
-            <p className="text-xl sm:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed text-white drop-shadow-lg">
-              Adaptive Kitchen is a pioneering venture studio, We turn bold ideas into everyday essentials transforming how people live, eat, and thrive.
-            </p>
-          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

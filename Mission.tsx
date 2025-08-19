@@ -53,7 +53,7 @@ export default function Mission() {
             Our Mission
           </h2>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
-            We create and launch breakthrough ventures that positively impact consumer healthy and wellness. By combining deep cultural insights with design excellence and a team of multi-disciplinary experts, we turn big ideas into thriving brands that transform and enrich people's lifestyles.
+            We turn everyday into better days by designing adaptive innovations that fit real life, spark joy, and move people forward.
           </p>
         </motion.div>
 
