@@ -152,7 +152,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                 className="flex items-center gap-2 px-4 py-2 bg-[#1DA1F2] text-white rounded-lg hover:bg-[#1a8cd8] transition-colors duration-300"
               >
                 <Twitter className="h-4 w-4" />
-                Twitter
+                X
               </button>
               <button
                 onClick={() => handleShare('facebook')}

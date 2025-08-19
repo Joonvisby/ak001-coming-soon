@@ -68,7 +68,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-black text-white">
+      <body className="bg-black">
         {GA_MEASUREMENT_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />}
         {children}
       </body>
