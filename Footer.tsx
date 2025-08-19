@@ -16,11 +16,11 @@ export default function Footer() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="mb-4">
+            <div className="mb-4 text-left">
               <img 
-                src="/AK white logo.svg" 
+                src="/AKWhiteTranP.svg" 
                 alt="Adaptive Kitchen" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">

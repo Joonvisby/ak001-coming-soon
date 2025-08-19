@@ -127,7 +127,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('mission')}
                 className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
               >
-                Mission
+                About
               </motion.button>
 
               <motion.button
