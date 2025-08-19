@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: 'Building the next wave of culture-shaping consumer brands. We create and launch breakthrough ventures that positively impact consumer health and wellness.',
     images: [
       {
-        url: 'https://www.adaptive.kitchen/og-image.png',
+        url: 'https://www.adaptive.kitchen/og-image.png?v=2',
         width: 1200,
         height: 630,
         alt: 'Adaptive Kitchen - Building better for you brands',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Adaptive Kitchen - Building better for you brands',
     description: 'Building the next wave of culture-shaping consumer brands. We create and launch breakthrough ventures that positively impact consumer health and wellness.',
-    images: ['https://www.adaptive.kitchen/og-image.png'],
+    images: ['https://www.adaptive.kitchen/og-image.png?v=2'],
     creator: '@adaptivekitchen',
     site: '@adaptivekitchen',
   },
