@@ -58,9 +58,10 @@ export default function Mission() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="heading-lg mb-8" style={{ color: '#000000' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#000000' }}>
             Our Mission
           </h2>
+          <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full mb-8"></div>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
             We turn everyday into better days by designing adaptive innovations that fit real life, spark joy, and move people forward.
           </p>
@@ -74,12 +75,7 @@ export default function Mission() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
-              Mission Pillars
-            </h3>
-            <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full"></div>
-          </div>
+
           
           <div className="container mx-auto">
             <div className="mb-12 flex w-full items-start justify-between gap-12">
@@ -113,7 +109,7 @@ export default function Mission() {
                         }}
                         className="cursor-pointer py-5 !no-underline transition"
                       >
-                        <h6 className={`text-xl font-semibold ${tab.id === activeTabId ? "text-gray-900" : "text-gray-600"}`}>
+                        <h6 className={`text-2xl font-bold ${tab.id === activeTabId ? "text-gray-900" : "text-gray-600"}`}>
                           {tab.title}
                         </h6>
                       </AccordionTrigger>
