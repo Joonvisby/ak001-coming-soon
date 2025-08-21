@@ -65,7 +65,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="absolute top-8 right-8 z-30 p-3 bg-[#007BFF] hover:bg-[#0056b3] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+        className="absolute top-8 right-8 z-30 p-3 bg-[#23397E] hover:bg-[#1a2b5e] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
         onClick={toggleMenu}
         aria-label="Open menu"
       >
@@ -92,7 +92,7 @@ export default function Hero() {
             {/* Close Button */}
             <button
               onClick={closeMenu}
-              className="absolute top-8 right-8 p-3 text-white hover:text-[#007BFF] transition-colors duration-300"
+              className="absolute top-8 right-8 p-3 text-white hover:text-[#23397E] transition-colors duration-300"
               aria-label="Close menu"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +115,7 @@ export default function Hero() {
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full mb-12"
+              className="w-24 h-1 bg-[#23397E] mx-auto rounded-full mb-12"
             />
 
             {/* Menu Items */}
@@ -125,7 +125,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
                 onClick={() => scrollToSection('mission')}
-                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#23397E] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#23397E]/50"
               >
                 About
               </motion.button>
@@ -135,7 +135,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 onClick={() => scrollToSection('blog')}
-                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#23397E] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#23397E]/50"
               >
                 Insights
               </motion.button>
@@ -145,7 +145,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
                 onClick={() => scrollToSection('contact')}
-                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#007BFF] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#007BFF]/50"
+                className="block w-full text-2xl md:text-3xl font-semibold text-white hover:text-[#23397E] transition-colors duration-300 py-4 border-b border-white/20 hover:border-[#23397E]/50"
               >
                 Contact
               </motion.button>
@@ -190,7 +190,7 @@ export default function Hero() {
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Removed the top-right orange circle */}
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#007BFF] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#23397E] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
       </div>
 
       {/* Content overlay */}
@@ -224,7 +224,7 @@ export default function Hero() {
               onClick={scrollToMission}
               className="group flex items-center justify-center px-8 py-5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               style={{ 
-                backgroundColor: '#007BFF', 
+                backgroundColor: '#23397E', 
                 color: 'white',
                 minWidth: '200px'
               }}

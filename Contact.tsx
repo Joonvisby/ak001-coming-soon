@@ -69,13 +69,13 @@ export default function Contact() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-6 py-4 rounded-full border-0 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#007BFF] focus:ring-opacity-50"
+              className="flex-1 px-6 py-4 rounded-full border-0 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#23397E] focus:ring-opacity-50"
               required
             />
             <button
               type="submit"
               disabled={isSubmitting || isSubmitted}
-              className="px-8 py-4 bg-[#007BFF] text-white rounded-full font-semibold hover:bg-[#0056b3] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-8 py-4 bg-[#23397E] text-white rounded-full font-semibold hover:bg-[#1a2b5e] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Subscribing...' : isSubmitted ? 'Subscribed!' : 'Subscribe'}
             </button>
@@ -85,7 +85,7 @@ export default function Contact() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-[#007BFF] mt-4"
+              className="text-[#23397E] mt-4"
             >
               Thanks for subscribing!
             </motion.p>

@@ -89,7 +89,7 @@ export default function Blog() {
           <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
             Latest Insights
           </h2>
-          <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full mb-8"></div>
+          <div className="w-24 h-1 bg-[#23397E] mx-auto rounded-full mb-8"></div>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
             Discover the latest trends, strategies, and insights in consumer brand development, venture building, and the future of better-for-you products.
           </p>
@@ -124,7 +124,7 @@ export default function Blog() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="inline-block px-3 py-1 bg-[#007BFF] text-white text-xs font-medium rounded-full">
+                      <span className="inline-block px-3 py-1 bg-[#23397E] text-white text-xs font-medium rounded-full">
                         {post.category}
                       </span>
                     </div>
@@ -143,7 +143,7 @@ export default function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#007BFF] transition-colors duration-300">
+                    <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#23397E] transition-colors duration-300">
                       {post.title}
                     </h3>
                     
@@ -152,11 +152,11 @@ export default function Blog() {
                     </p>
 
                     <div className="flex items-center justify-between mt-auto">
-                      <div className="flex items-center gap-2 text-[#007BFF]">
+                      <div className="flex items-center gap-2 text-[#23397E]">
                         <BookOpen className="h-4 w-4" />
                         <span className="text-sm font-medium">Read More</span>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-[#007BFF] transition-transform duration-300 group-hover:translate-x-1" />
+                      <ArrowRight className="h-5 w-5 text-[#23397E] transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
                   </div>
                   </div>
@@ -178,7 +178,7 @@ export default function Blog() {
           <Link href="/blog">
             <button
               onClick={() => trackButtonClick('blog_view_all_button')}
-              className="inline-flex items-center gap-2 px-12 py-4 bg-[#007BFF] text-white rounded-full font-semibold hover:bg-[#0056b3] transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-12 py-4 bg-[#23397E] text-white rounded-full font-semibold hover:bg-[#1a2b5e] transition-colors duration-300"
             >
               View All Insights
               <ArrowRight className="h-5 w-5" />

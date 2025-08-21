@@ -98,7 +98,7 @@ export default function BlogListingContent() {
           <div className="flex items-center gap-4 mb-6">
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-[#007BFF] hover:text-[#0056b3] transition-colors duration-300"
+              className="inline-flex items-center gap-2 text-[#23397E] hover:text-[#1a2b5e] transition-colors duration-300"
             >
               <ArrowLeft className="h-5 w-5" />
               <span>Back to Home</span>
@@ -162,7 +162,7 @@ export default function BlogListingContent() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                       <div className="absolute top-4 left-4">
-                        <span className="inline-block px-3 py-1 bg-[#007BFF] text-white text-xs font-medium rounded-full">
+                        <span className="inline-block px-3 py-1 bg-[#23397E] text-white text-xs font-medium rounded-full">
                           {post.category}
                         </span>
                       </div>
@@ -181,7 +181,7 @@ export default function BlogListingContent() {
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#007BFF] transition-colors duration-300">
+                      <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-[#23397E] transition-colors duration-300">
                         {post.title}
                       </h3>
                       
@@ -190,11 +190,11 @@ export default function BlogListingContent() {
                       </p>
 
                       <div className="flex items-center justify-between mt-auto">
-                        <div className="flex items-center gap-2 text-[#007BFF]">
+                        <div className="flex items-center gap-2 text-[#23397E]">
                           <BookOpen className="h-4 w-4" />
                           <span className="text-sm font-medium">Read More</span>
                         </div>
-                        <ArrowRight className="h-5 w-5 text-[#007BFF] transition-transform duration-300 group-hover:translate-x-1" />
+                        <ArrowRight className="h-5 w-5 text-[#23397E] transition-transform duration-300 group-hover:translate-x-1" />
                       </div>
                     </div>
                   </div>

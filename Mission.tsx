@@ -61,7 +61,7 @@ export default function Mission() {
           <h2 className="text-3xl md:text-4xl font-bold mb-8" style={{ color: '#000000' }}>
             Our Mission
           </h2>
-          <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full mb-8"></div>
+          <div className="w-24 h-1 bg-[#23397E] mx-auto rounded-full mb-8"></div>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
             As a wellness-driven CPG innovator, we turn everyday into better days by designing adaptive solutions that fit real life, spark joy, and move people forward.
           </p>
@@ -150,7 +150,7 @@ export default function Mission() {
           <h3 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#000000' }}>
             Our Core Pillars
           </h3>
-          <div className="w-24 h-1 bg-[#007BFF] mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-[#23397E] mx-auto rounded-full"></div>
         </motion.div>
 
         <div className="mx-auto my-8 grid w-full max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4 mb-16 items-stretch">
@@ -358,7 +358,7 @@ export default function Mission() {
             onClick={scrollToContact}
             className="group flex items-center justify-center px-8 py-5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"
             style={{ 
-              backgroundColor: '#007BFF', 
+              backgroundColor: '#23397E', 
               color: 'white',
               minWidth: '200px'
             }}

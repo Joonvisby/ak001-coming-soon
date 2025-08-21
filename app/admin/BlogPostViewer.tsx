@@ -41,7 +41,7 @@ export default function BlogPostViewer({ post, onClose }: BlogPostViewerProps) {
           {/* Header */}
           <header className="mb-8">
             <div className="mb-4">
-              <span className="inline-block px-3 py-1 bg-[#007BFF] text-white text-sm font-medium rounded-full">
+              <span className="inline-block px-3 py-1 bg-[#23397E] text-white text-sm font-medium rounded-full">
                 {post.category}
               </span>
             </div>

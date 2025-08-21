@@ -24,7 +24,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-[#007BFF] to-[#0056b3] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#23397E] to-[#1a2b5e] bg-clip-text text-transparent;
   }
 
   .card-ag1 {
@@ -38,7 +38,7 @@
   }
 
   .text-accent {
-    @apply text-[#007BFF];
+    @apply text-[#23397E];
   }
 }
 
@@ -52,12 +52,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #007BFF;
+  background: #23397E;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0056b3;
+  background: #1a2b5e;
 }
 
 /* Smooth scrolling */

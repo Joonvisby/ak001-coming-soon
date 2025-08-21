@@ -60,7 +60,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           <div className="flex items-center gap-4 mb-6">
             <Link 
               href="/blog"
-              className="inline-flex items-center gap-2 text-[#007BFF] hover:text-[#0056b3] transition-colors duration-300"
+              className="inline-flex items-center gap-2 text-[#23397E] hover:text-[#1a2b5e] transition-colors duration-300"
             >
               <ArrowLeft className="h-5 w-5" />
               <span>Back to All Insights</span>
@@ -80,7 +80,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           {/* Header */}
           <header className="mb-12">
             <div className="mb-6">
-              <span className="inline-block px-4 py-2 bg-[#007BFF] text-white text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-2 bg-[#23397E] text-white text-sm font-medium rounded-full mb-4">
                 {post.category}
               </span>
             </div>
