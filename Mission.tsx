@@ -63,7 +63,7 @@ export default function Mission() {
           </h2>
           <div className="w-24 h-1 bg-[#23397E] mx-auto rounded-full mb-8"></div>
           <p className="text-body max-w-4xl mx-auto text-lg leading-relaxed" style={{ color: '#000000' }}>
-            We create wellness-driven CPG solutions that fit real life, spark joy in everyday moments, and help people move forward.
+            We create wellness-driven products that make everyday life more fulfilling
           </p>
         </motion.div>
 
